@@ -22,24 +22,31 @@ char *readLine(char *prom)
     printf("%s" , prom);
     int ressize = 0;
     char *word[1];
-    char *result = (char*)calloc(1,10);
-    char *temp = (char*)calloc(1,10);
+    char *result = (char*)calloc(1,sizeof(char));
+    char *temp = (char*)calloc(1,sizeof(char));
 
     for(;;)
     {
-        if(fgets(word,sizeof(word),stdin) != NULL)
+        if(fgets(word,sizeof(word[0]),stdin) != NULL)
         {
             ressize = (strlen(result) + strlen(word)) * sizeof(char);
-            temp = (char*)realloc(result , ressize);
+
+            for(;;){
+                temp = (char*)realloc(result , ressize);
+                if(temp != NULL){
+                    break;
+                }
+                printf("temp is null\n");
+            }
+
             strcat(temp,word);
-            result = (char*)realloc(temp,ressize);
 
-            if(result != temp)
-            {
-                printf("free!!\n");
-                printf("%s\n",temp);
-
-                free(temp);
+            for(;;){
+                result = (char*)realloc(temp,ressize);
+                if(result != NULL){
+                    break;
+                }
+                printf("result is null\n");
             }
 
             printf("fs : %s\n",temp);
@@ -54,4 +61,4 @@ char *readLine(char *prom)
     }
     return "none";
 }
-//                    f
+//                    f                    f                    f                    f                    f
