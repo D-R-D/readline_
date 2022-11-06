@@ -36,7 +36,6 @@ char *readLine(char *prom)
                 if(temp != NULL){
                     break;
                 }
-                printf("temp is null\n");
             }
 
             strcat(temp,word);
@@ -46,10 +45,7 @@ char *readLine(char *prom)
                 if(result != NULL){
                     break;
                 }
-                printf("result is null\n");
             }
-
-            printf("fs : %s\n",temp);
 
             size_t length = strlen(result);
             if(result[length - 1] == '\n') 
@@ -59,6 +55,6 @@ char *readLine(char *prom)
             }
         }
     }
-    return "none";
+    return NULL;
 }
 //                    f                    f                    f                    f                    f
